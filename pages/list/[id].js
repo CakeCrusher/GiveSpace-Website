@@ -12,7 +12,7 @@ const List = ({ list }) => {
     return <Text>List does not exist</Text>;
   }
 
-  const items = list.items.map((item) => <Item data={item} />);
+  const items = list.items.map((item) => <Item key={item.id} data={item} />);
 
   return (
     <div className={styles.container}>
