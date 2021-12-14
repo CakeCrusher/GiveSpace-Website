@@ -4,36 +4,29 @@ import styles from "../../styles/Home.module.css";
 import { useRouter } from "next/router";
 import { fetchGraphQL } from "../../utils/helperFunctions";
 import { GET_LIST } from "../../utils/schemas";
-import {
-  Text,
-  Stat,
-  StatLabel,
-  StatNumber,
-  StatHelpText,
-  Avatar,
-  Image as ImageComponent,
-  Flex,
-  Spacer,
-  Box,
-} from "@chakra-ui/react";
+import { Text, Avatar, Flex, Spacer } from "@chakra-ui/react";
+import Item from "../../components/Item";
 
 const List = ({ list }) => {
-  const router = useRouter();
-  const date = new Date(list.date_created);
-  // transform date into a readable date
-  date.toDateString();
+  if (list.errors) {
+    return <Text>List does not exist</Text>;
+  }
+
+  const items = list.items.map((item) => <Item data={item} />);
 
   return (
     <div className={styles.container}>
       <Head>
-        <title>{list.user.username}`s List</title>
+        <title>
+          {list.user.username}&apos;s {list.title} wishlist
+        </title>
         <meta
           name="description"
           content={`${list.title} contains ${list.items.length} items.`}
         />
         <link rel="icon" href="/favicon.ico" />
         <meta property="og:site_name" content="GiveSpace" />
-        {/* <meta property="og:image" content={list.user.profile_pic_url} /> */}
+        <meta property="og:image" content={list.user.profile_pic_url} />
         <meta name="author" content={list.user.username} />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#c9042c" />
@@ -47,29 +40,12 @@ const List = ({ list }) => {
             src={list.user.profile_pic_url}
             mr={4}
           />
-          <Text fontSize="6xl">{list.user.username}'s List</Text>
+          <Text fontSize="6xl">{list.user.username}&apos;s List</Text>
           <Spacer />
           <Text fontSize="2xl">Hi</Text>
         </Flex>
         <Flex w="100%" wrap="wrap-reverse">
-          {list.items.map((item) => (
-            <Box key={item.id} m={[0, 10]}>
-              <Stat w={200}>
-                <StatLabel>{item.name}</StatLabel>
-                <ImageComponent
-                  src={item.image_url}
-                  alt={`${item.name} image`}
-                />
-                {/* <Image
-            src={item.image_url}
-            alt={`${item.name} image`}
-            layout="fill"
-          /> */}
-                <StatNumber>${item.price}</StatNumber>
-                <StatHelpText>{date.toDateString()}</StatHelpText>
-              </Stat>
-            </Box>
-          ))}
+          {items}
         </Flex>
       </main>
 
