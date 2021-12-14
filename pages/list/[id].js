@@ -32,6 +32,11 @@ const List = ({ list }) => {
           content={`${list.title} contains ${list.items.length} items.`}
         />
         <link rel="icon" href="/favicon.ico" />
+        <meta property="og:site_name" content="GiveSpace" />
+        {/* <meta property="og:image" content={list.user.profile_pic_url} /> */}
+        <meta name="author" content={list.user.username} />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#c9042c" />
       </Head>
 
       <main className={styles.main}>
