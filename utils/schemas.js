@@ -11,6 +11,7 @@ query MyQuery($list_id: uuid = "") {
       price
       date_created
       id
+      status
     }
     user {
       username
