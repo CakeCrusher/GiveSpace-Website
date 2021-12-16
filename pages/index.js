@@ -40,7 +40,7 @@ export default function Home() {
           <Text fontSize="xl">
             Never again worry about what to give as a gift. GiveSpace makes it
             easy to make your wishlist and share it with others. GiveSpace
-            recognizes your list`s items and automatically fills in the details.
+            recognizes your list items and automatically fills in the details.
             It's that simple. Find your friends and family on the app to view
             their lists and give the perfect gift. Lists will mark which items
             have been bought, so there’s no risk of unwanted duplicates.
