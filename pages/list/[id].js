@@ -73,7 +73,7 @@ const List = ({ list }) => {
           <meta
             name="description"
             content={`This list contains ${
-              list.items.filter((item) => !item.state).length
+              list.items.filter((item) => !item.status).length
             } unbought items.`}
           />
           <link rel="icon" href="/favicon.ico" />
