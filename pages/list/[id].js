@@ -114,7 +114,7 @@ const List = ({ list }) => {
               </Flex>
               <Spacer />
             </Flex>
-            <Flex w="100%" wrap="wrap-reverse">
+            <Flex w="100%" wrap="wrap">
               {items}
             </Flex>
           </Flex>
