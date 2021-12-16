@@ -12,18 +12,35 @@ import {
   Spacer,
   Box,
   Icon,
+  Image as ImageComponent,
   Center,
+  Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import Item from "../../components/Item";
-import NavBar from "../../components/Nav";
+import Nav from "../../components/Nav";
+import Link from "next/link";
 
 import { FiShare2 } from "react-icons/fi";
 
 const List = ({ list }) => {
   const [copied, setCopied] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
   if (list.errors) {
     return <Text>List does not exist</Text>;
   }
+
+  const GOOGLE_PLAY_LINK =
+    "https://play.google.com/store/apps/details?id=com.spotify.music&hl=en_US&gl=US";
 
   const handleCopy = () => {
     setCopied(true);
@@ -36,21 +53,31 @@ const List = ({ list }) => {
 
   console.log(list);
 
-  const items = list.items.map((item) => <Item key={item.id} data={item} />);
+  const items = list.items.map((item) => (
+    <Item
+      key={item.id}
+      data={item}
+      appLink={GOOGLE_PLAY_LINK}
+      openModal={openModal}
+    />
+  ));
 
   return (
     <Box minH="100vh" minW="100vw" bg="#eef">
       <Flex pl={6} pr={6} pt={3} pb={3} direction="column">
-        <NavBar />
+        <Nav appLink={GOOGLE_PLAY_LINK} />
         <Head>
           <title>
-            {list.user.username}&apos;s {list.title} wishlist
+            {list.user.username}`s {list.title} wishlist
           </title>
           <meta
             name="description"
-            content={`${list.title} contains ${list.items.length} items.`}
+            content={`This list contains ${
+              list.items.filter((item) => !item.state).length
+            } unbought items.`}
           />
           <link rel="icon" href="/favicon.ico" />
+          <meta property="og:site_icon" content="/favicon.ico" />
           <meta property="og:site_name" content="GiveSpace" />
           <meta property="og:image" content={list.user.profile_pic_url} />
           <meta name="author" content={list.user.username} />
@@ -89,9 +116,47 @@ const List = ({ list }) => {
             </Flex>
             <Flex w="100%" wrap="wrap-reverse">
               {items}
-              {items}
             </Flex>
           </Flex>
+          <Modal isOpen={modalOpen} onClose={closeModal}>
+            <ModalOverlay />
+            <ModalContent>
+              <ModalCloseButton />
+              <ModalBody>
+                <Flex>
+                  <Center>
+                    <ImageComponent
+                      boxSize={42}
+                      objectFit="cover"
+                      borderRadius={5}
+                      src="/icon.png"
+                      alt="GiveSpace icon"
+                    />
+                    <Flex>
+                      <Text color="brand.900" fontSize="4xl" ml={2}>
+                        Give
+                      </Text>
+                      <Text fontSize="4xl">Space</Text>
+                    </Flex>
+                  </Center>
+                </Flex>
+                <Text>Download the app for more options</Text>
+              </ModalBody>
+
+              <ModalFooter>
+                <Button variant="ghost" onClick={closeModal}>
+                  close
+                </Button>
+                <Link href={GOOGLE_PLAY_LINK}>
+                  <a>
+                    <Button color="white" bg="brand.900" mr={3}>
+                      download
+                    </Button>
+                  </a>
+                </Link>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
         </main>
 
         <footer className={styles.footer}></footer>

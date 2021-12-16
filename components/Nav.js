@@ -17,7 +17,7 @@ import { Image } from "next/image";
 import Link from "next/link";
 import { FaGooglePlay } from "react-icons/fa";
 
-const Nav = () => {
+const Nav = ({ appLink }) => {
   return (
     <Flex direction="column">
       <Flex m={[0]}>
@@ -44,7 +44,7 @@ const Nav = () => {
           <Flex>
             <Spacer />
             <Center>
-              <Link href="https://play.google.com/store/apps/details?id=com.spotify.music">
+              <Link href={appLink}>
                 <a>
                   <Box boxSize={9} borderRadius={7} bg="brand.700">
                     <Icon m={1.5} boxSize={6} as={FaGooglePlay} />

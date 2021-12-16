@@ -12,18 +12,23 @@ import {
   Center,
 } from "@chakra-ui/react";
 import { FiCheck } from "react-icons/fi";
+import Link from "next/link";
 
-const Item = ({ data }) => {
+const Item = ({ data, appLink, openModal }) => {
   const date = new Date(data.date_created);
 
   return (
     <Box
+      onClick={openModal}
+      cursor="pointer"
       opacity={data.status ? 0.7 : 1}
       position="relative"
       key={data.id}
       mr={7}
       mt={7}
     >
+      {/* <Link href={appLink}>
+        <a> */}
       <Box
         w={200}
         h={300}
@@ -78,6 +83,8 @@ const Item = ({ data }) => {
           </Center>
         </Box>
       )}
+      {/* </a>
+      </Link> */}
     </Box>
   );
 };
