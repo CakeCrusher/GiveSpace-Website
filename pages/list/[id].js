@@ -68,7 +68,7 @@ const List = ({ list }) => {
         <Nav appLink={GOOGLE_PLAY_LINK} />
         <Head>
           <title>
-            {list.user.username}&apos; {list.title} wishlist
+            {list.user.username}&apos;s {list.title} wishlist
           </title>
           <meta
             name="description"
