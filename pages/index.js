@@ -20,7 +20,7 @@ export default function Home() {
         <Flex p={3} direction="column">
           <Nav
             appLink={
-              "https://play.google.com/store/apps/details?id=com.spotify.music&hl=en_US&gl=US"
+              "https://play.google.com/store/apps/details?id=com.reservadex"
             }
           />
           <UnorderedList mb={5}>

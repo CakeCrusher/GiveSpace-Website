@@ -40,7 +40,7 @@ const List = ({ list }) => {
   }
 
   const GOOGLE_PLAY_LINK =
-    "https://play.google.com/store/apps/details?id=com.spotify.music&hl=en_US&gl=US";
+    "https://play.google.com/store/apps/details?id=com.reservadex";
 
   const handleCopy = () => {
     setCopied(true);
