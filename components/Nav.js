@@ -1,54 +1,68 @@
-import React from "react";
+import React from 'react';
 import {
-  Stat,
-  StatLabel,
-  StatNumber,
-  StatHelpText,
   Image as ImageComponent,
-  Box,
   Flex,
   Text,
   Spacer,
   Center,
   Icon,
-  Divider,
-} from "@chakra-ui/react";
-import { Image } from "next/image";
-import Link from "next/link";
-import { FaGooglePlay } from "react-icons/fa";
+} from '@chakra-ui/react';
+import Link from 'next/link';
+import { FaGooglePlay } from 'react-icons/fa';
 
 const Nav = ({ appLink }) => {
   return (
-    <Flex direction="column">
-      <Flex m={[0]}>
+    <Flex
+      mb={{ base: '24px', lg: '24px' }}
+      py={{ base: '24px', lg: '24px' }}
+      borderBottom="2px solid #9F9F9F"
+      direction="column"
+    >
+      <Flex px={{ base: '0px', lg: '124px' }}>
         <Flex>
           <Center>
             <ImageComponent
-              boxSize={42}
+              boxSize={{ base: '48px', lg: '64px' }}
               objectFit="cover"
               borderRadius={5}
               src="/icon.png"
               alt="GiveSpace icon"
             />
             <Flex>
-              <Text color="brand.900" fontSize="4xl" ml={2}>
+              <Text
+                fontFamily="Quicksand"
+                fontWeight="600"
+                color="brand.900"
+                fontSize={{ base: '24px', lg: '36px' }}
+                ml={2}
+              >
                 Give
               </Text>
-              <Text fontSize="4xl">Space</Text>
+              <Text
+                fontFamily="Quicksand"
+                fontWeight="600"
+                fontSize={{ base: '24px', lg: '36px' }}
+              >
+                Space
+              </Text>
             </Flex>
           </Center>
         </Flex>
         <Spacer />
         <Flex direction="column">
-          <Text fontSize="lg">Download the app</Text>
+          <Text fontSize={{ base: '14px', lg: '18px' }}>Download the app</Text>
           <Flex>
             <Spacer />
             <Center>
               <Link href={appLink}>
                 <a>
-                  <Box boxSize={9} borderRadius={7} bg="brand.700">
-                    <Icon m={1.5} boxSize={6} as={FaGooglePlay} />
-                  </Box>
+                  <Center
+                    boxSize={{ base: 8, lg: 12 }}
+                    borderRadius={{ base: 12, lg: 15 }}
+                    bg="brand.700"
+                  >
+                    <Icon boxSize={{ base: 4, lg: 8 }} as={FaGooglePlay} />
+                  </Center>
                 </a>
               </Link>
             </Center>
@@ -57,7 +71,6 @@ const Nav = ({ appLink }) => {
           <Spacer />
         </Flex>
       </Flex>
-      <Divider mt={3} mb={3} />
     </Flex>
   );
 };

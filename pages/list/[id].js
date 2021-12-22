@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import Head from "next/head";
-import Image from "next/image";
-import styles from "../../styles/Home.module.css";
-import { useRouter } from "next/router";
-import { fetchGraphQL } from "../../utils/helperFunctions";
-import { GET_LIST } from "../../utils/schemas";
+import React, { useState } from 'react';
+import Head from 'next/head';
+import Image from 'next/image';
+import styles from '../../styles/Home.module.css';
+import { useRouter } from 'next/router';
+import { fetchGraphQL } from '../../utils/helperFunctions';
+import { GET_LIST } from '../../utils/schemas';
 import {
   Text,
   Avatar,
@@ -22,12 +22,12 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-} from "@chakra-ui/react";
-import Item from "../../components/Item";
-import Nav from "../../components/Nav";
-import Link from "next/link";
+} from '@chakra-ui/react';
+import Item from '../../components/Item';
+import Nav from '../../components/Nav';
+import Link from 'next/link';
 
-import { FiShare2 } from "react-icons/fi";
+import { FiShare2 } from 'react-icons/fi';
 
 const List = ({ list }) => {
   const [copied, setCopied] = useState(false);
@@ -40,7 +40,7 @@ const List = ({ list }) => {
   }
 
   const GOOGLE_PLAY_LINK =
-    "https://play.google.com/store/apps/details?id=com.reservadex";
+    'https://play.google.com/store/apps/details?id=com.reservadex';
 
   const handleCopy = () => {
     setCopied(true);
@@ -63,8 +63,8 @@ const List = ({ list }) => {
   ));
 
   return (
-    <Box minH="100vh" minW="100vw" bg="#eef">
-      <Flex pl={6} pr={6} pt={3} pb={3} direction="column">
+    <Box px="24px" minH="100vh" minW="100vw" bg="#e9e9e9">
+      <Flex direction="column">
         <Nav appLink={GOOGLE_PLAY_LINK} />
         <Head>
           <title>
@@ -86,35 +86,46 @@ const List = ({ list }) => {
             content="width=device-width, initial-scale=1.0"
           />
           <meta name="theme-color" content="#c9042c" />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600&family=Source+Sans+Pro:wght@400;600&display=swap"
+            rel="stylesheet"
+          />
         </Head>
 
         <main className={styles.main}>
-          <Flex pl="10%" pr="10%" direction="column">
+          <Flex px={{ base: '0px', lg: '124px' }} direction="column">
             <Flex w="100%" align="center">
               <Avatar
-                size="xl"
+                w={{ base: '64px', lg: '128px' }}
+                h={{ base: '64px', lg: '128px' }}
                 name="Kola Tioluwani"
                 src={list.user.profile_pic_url}
                 mr={4}
               />
               <Flex direction="column">
-                <Text opacity={0.9} fontSize="3xl">
+                <Text opacity={0.9} fontSize={{ md: '24px', base: '18px' }}>
                   {list.user.username}
                 </Text>
-                <Text fontSize="5xl">{list.title}</Text>
+                <Text fontSize={{ md: '36px', base: '24px' }} fontWeight="600">
+                  {list.title}
+                </Text>
               </Flex>
               <Spacer />
             </Flex>
-            <Flex mt={5} mb={0}>
+            <Flex mt="48px" mb="32px">
               <Flex cursor="pointer" onClick={handleCopy}>
                 <Center>
                   <Icon m={1.5} boxSize={6} as={FiShare2} />
-                  <Text fontSize="lg">{copied ? "Link copied" : "Share"}</Text>
+                  <Text fontSize={{ base: '18px', lg: '24px' }}>
+                    {copied ? 'Link copied' : 'Share'}
+                  </Text>
                 </Center>
               </Flex>
               <Spacer />
             </Flex>
-            <Flex w="100%" wrap="wrap">
+            <Flex w="100%" justifyContent="flex-start" flexWrap="wrap">
               {items}
             </Flex>
           </Flex>
@@ -122,7 +133,7 @@ const List = ({ list }) => {
             <ModalOverlay />
             <ModalContent>
               <ModalCloseButton />
-              <ModalBody>
+              <ModalBody maxW="95%">
                 <Flex>
                   <Center>
                     <ImageComponent
@@ -133,10 +144,22 @@ const List = ({ list }) => {
                       alt="GiveSpace icon"
                     />
                     <Flex>
-                      <Text color="brand.900" fontSize="4xl" ml={2}>
+                      <Text
+                        fontFamily="Quicksand"
+                        fontWeight="600"
+                        color="brand.900"
+                        fontSize="4xl"
+                        ml={2}
+                      >
                         Give
                       </Text>
-                      <Text fontSize="4xl">Space</Text>
+                      <Text
+                        fontWeight="600"
+                        fontFamily="Quicksand"
+                        fontSize="4xl"
+                      >
+                        Space
+                      </Text>
                     </Flex>
                   </Center>
                 </Flex>
@@ -170,7 +193,7 @@ export const getServerSideProps = async ({ params }) => {
     list_id: params.id,
   });
   if (fetchRes.errors || !fetchRes.data.list[0]) {
-    return { props: { list: { errors: "List not found" } } };
+    return { props: { list: { errors: 'List not found' } } };
   } else {
     return { props: { list: fetchRes.data.list[0] } };
   }
